@@ -4,36 +4,82 @@ const { connectDB } = require('./database');
 async function createAnswer(answer) {
     const db = await connectDB();
     const collection = db.collection('survey_answers');
-    const result = await collection.insertOne(answer);
-    return result;
+
+    try {
+        // Vérifier si une réponse avec le même ID existe déjà
+        const existingAnswer = await collection.findOne({ _id: answer._id });
+        if (existingAnswer) {
+            throw new Error('Answer with this ID already exists');
+        }
+
+        const result = await collection.insertOne(answer);
+        console.log("Response ajouté avec",result)
+        return result;
+    } catch (err) {
+        console.error('Error creating answer:', err);
+        throw err;
+    }
 }
 
 async function getAnswers() {
     const db = await connectDB();
     const collection = db.collection('survey_answers');
-    const answers = await collection.find().toArray();
-    return answers;
+    try {
+        const answers = await collection.find().toArray();
+        console.log("Liste des enquetes",answers)
+        return answers;
+    } catch (err) {
+        console.error('Error getting answers:', err);
+        throw err;
+    }
 }
 
 async function getAnswerById(id) {
     const db = await connectDB();
     const collection = db.collection('survey_answers');
-    const answer = await collection.findOne({ _id: id });
-    return answer;
+    try {
+        const answer = await collection.findOne({ _id: id });
+        if (!answer) {
+            throw new Error('Answer not found');
+        }
+        console.log("Enquete",answer)
+        return answer;
+    } catch (err) {
+        console.error('Error getting answer by ID:', err);
+        throw err;
+    }
 }
 
 async function updateAnswer(id, update) {
     const db = await connectDB();
     const collection = db.collection('survey_answers');
-    const result = await collection.updateOne({ _id: id }, { $set: update });
-    return result;
+    try {
+        const result = await collection.updateOne({ _id: id }, { $set: update });
+        if (result.matchedCount === 0) {
+            throw new Error('Answer not found');
+        }
+        console.log("Mise à jour avec succées",result)
+        return result;
+    } catch (err) {
+        console.error('Error updating answer:', err);
+        throw err;
+    }
 }
 
 async function deleteAnswer(id) {
     const db = await connectDB();
     const collection = db.collection('survey_answers');
-    const result = await collection.deleteOne({ _id: id });
-    return result;
+    try {
+        const result = await collection.deleteOne({ _id: id });
+        if (result.deletedCount === 0) {
+            throw new Error('Answer not found');
+        }
+        
+        return result;
+    } catch (err) {
+        console.error('Error deleting answer:', err);
+        throw err;
+    }
 }
 
 module.exports = { createAnswer, getAnswers, getAnswerById, updateAnswer, deleteAnswer };
