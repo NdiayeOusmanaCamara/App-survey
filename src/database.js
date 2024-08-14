@@ -1,4 +1,4 @@
-// database.js
+// db.js
 const { MongoClient } = require('mongodb');
 
 const url = 'mongodb://localhost:27017';
@@ -9,7 +9,7 @@ let db = null;
 async function connectDB() {
     if (db) return db;
 
-    const client = new MongoClient(url);
+    const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
     try {
         await client.connect();

@@ -1,4 +1,4 @@
-// index.js
+// app.js
 const { createSurvey, getSurveys, getSurveyById, updateSurvey, deleteSurvey } = require('./surveyCrud');
 const { createQuestion, getQuestions, getQuestionById, updateQuestion, deleteQuestion } = require('./questionCrud');
 const { createAnswer, getAnswers, getAnswerById, updateAnswer, deleteAnswer } = require('./answerCrud');
@@ -7,7 +7,8 @@ async function run() {
     try {
         // Créer une nouvelle enquête
         const newSurvey = {
-            name: "Enquête de Satisfaction 003",
+            id : 2,
+            name: "Enquête de Satisfaction 124",
             description: "Évaluation de nouveaux services.",
             createdAt: new Date(),
             createdBy: {
@@ -20,6 +21,7 @@ async function run() {
 
         // Créer une nouvelle question
         const newQuestion = {
+
             surveyId: createSurveyResult.insertedId,
             title: "Comment avez-vous entendu parler de nos services ?",
             type: "singleChoice"
@@ -30,7 +32,7 @@ async function run() {
         // Créer une nouvelle réponse
         const newAnswer = {
             questionId: createQuestionResult.insertedId,
-            title: "commande"
+            title: "televisions"
         };
         const createAnswerResult = await createAnswer(newAnswer);
         console.log('Answer Created:', createAnswerResult);
