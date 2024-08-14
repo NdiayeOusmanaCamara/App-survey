@@ -13,7 +13,7 @@ async function createAnswer(answer) {
         }
 
         const result = await collection.insertOne(answer);
-        console.log("Response ajouté avec",result)
+        console.log("Response ajouté avec succées",result)
         return result;
     } catch (err) {
         console.error('Error creating answer:', err);
@@ -74,7 +74,7 @@ async function deleteAnswer(id) {
         if (result.deletedCount === 0) {
             throw new Error('Answer not found');
         }
-        
+        console.log("une reponse à été supprimé")
         return result;
     } catch (err) {
         console.error('Error deleting answer:', err);

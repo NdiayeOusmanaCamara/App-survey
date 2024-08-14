@@ -5,83 +5,80 @@ const { createAnswer, getAnswers, getAnswerById, updateAnswer, deleteAnswer } = 
 
 async function run() {
     try {
-        // // Créer une nouvelle enquête avec ID explicite
-        // const newSurvey = {
-        //     _id: 1,
-        //     name: "Enquête de Satisfaction",
-        //     description: "Évaluation de nouveaux services.",
-        //     createdAt: new Date(),
-        //     createdBy: {
-        //         employeeName: "Alice Doe",
-        //         employeeRole: "Directrice marketing"
-        //     }
-        // };
-        // await createSurvey(newSurvey);
+        // Créer une nouvelle enquête avec ID explicite
+        const newSurvey = {   
+        id: 1,
+        name: "Enquête de Satisfaction 001",
+        description: "Enquête visant à évaluer la satisfaction des clients concernant nos services.",
+        createdAt: "2024-07-25T08:00:00Z",
+        createdBy: {
+            employeeName: "camara Smith",
+            employeeRole: "Responsable du service client"
+            }
+        };
+        await createSurvey(newSurvey);
 
-        // Créer une nouvelle question avec ID explicite
-        // const newQuestion = {
-        //     _id: 6,
-        //     surveyId: 7,
-        //     title: "Comment avez-vous entendu parler de nos services ?",
-        //     type: "singleChoice"
-        // };
+         // // Lire toutes les enquetes
+        const surveys = await getSurveys();
+        console.log('All Survey:', surveys);
         
-        // await createQuestion(newQuestion);
-        
+        // // Lire une enquête par ID
+        const survey = await getSurveyById(1);
+        console.log('Survey with ID 1:', survey);
 
-        // // // Créer une nouvelle réponse avec ID explicite
-        // const newAnswer = {
-        //     _id: 9,
-        //     questionId: 19,
-        //     title: "Roman"
-        // };
-        // await createAnswer(newAnswer);
+            // Mettre à jour une enquete
+        await updateSurvey(1, { title: "Comment évalueriez-vous notre service ?" });
 
-         // // // Lire toutes les réponses
-        // const answers = await getAnswers();
-        // console.log('All Answers:', answers);
-
-        // // // Lire une réponse par ID
-        // const answer = await getAnswerById(1);
-        // console.log('Answer with ID 1:', answer);
-
-        // // Lire toutes les enquêtes
-        // const surveys = await  getAnswers();
-        // console.log('All Surveys:', surveys);
-
-        // // Lire toutes les questions
-        // const questions = await getQuestions();
-        // console.log('All Questions:', questions);
-
-       
-        // // // Lire une enquête par ID
-        // const survey = await getSurveyById(1);
-        // console.log('Survey with ID 1:', survey);
-
-        // // // Lire une question par ID
-        // const question = await getQuestionById(1);
-        // console.log('Question with ID 1:', question);
-
+        // // Supprimer une enquête
+        await deleteSurvey(1);
         
 
-        // // // Mettre à jour une enquête
-        // await updateSurvey(1, { description: "Évaluation complète des services." });
+        // Créer une nouvelle réponse avec ID explicite
+        const newAnswer = {
+            _id: 2,
+            questionId: 1,
+            title: "Satisfait"
+        };
+        await createAnswer(newAnswer);
 
-        // // // Mettre à jour une question
-        // await updateQuestion(1, { title: "Comment avez-vous entendu parler de nous ?" });
+         // // Lire toutes les réponses
+        const answers = await getAnswers();
+        console.log('All Answers:', answers);
 
-        // // Mettre à jour une réponse
+        // // Lire une réponse par ID
+        const answer = await getAnswerById(1);
+        console.log('Answer with ID 1:', answer);
+
+          // Mettre à jour une réponse
         await updateAnswer(1, { title: "Comment évalueriez-vous notre service ?" });
 
-        // // // Supprimer une enquête
-        // await deleteSurvey(1);
+        // // Supprimer une reponse
+        await deleteAnswer(1);
+
+        // Créer un nouveau question avec ID explicite
+        const newQuestion = {
+            _id: 2,
+            surveyId: 1,
+            title: "Satisfait",
+            type:"chansons"
+        };
+        await createQuestion(newQuestion);
+
+
+        // Lire toutes les questions
+        const questions = await getQuestions();
+        
+
+        // // Lire une question par ID
+        const question = await getQuestionById(2);
+        
+
+    
+        // // // Mettre à jour une question
+        await updateQuestion(1, { title: "Comment avez-vous entendu parler de nous ?" });
 
         // // // Supprimer une question
-        // await deleteQuestion(1);
-        // console.log("questions supprimé")
-
-        // // // Supprimer une réponse
-        // await deleteAnswer(1);
+        await deleteQuestion(1);
 
     } catch (err) {
         console.error('Error:', err);

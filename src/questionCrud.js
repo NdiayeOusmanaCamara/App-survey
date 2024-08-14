@@ -13,7 +13,7 @@ async function createQuestion(question) {
         }
 
         const result = await collection.insertOne(question);
-        console.log("QUestion ajouté avec", result)
+        console.log("Question ajouté avec succées", result)
         return result;
     } catch (err) {
         console.error('Error creating question:', err);
@@ -26,6 +26,7 @@ async function getQuestions() {
     const collection = db.collection('survey_questions');
     try {
         const questions = await collection.find().toArray();
+        console.log('All Questions:', questions);
         return questions;
     } catch (err) {
         console.error('Error getting questions:', err);
@@ -41,6 +42,7 @@ async function getQuestionById(id) {
         if (!question) {
             throw new Error('Question not found');
         }
+        console.log('Question with ID:', question);
         return question;
     } catch (err) {
         console.error('Error getting question by ID:', err);
@@ -56,6 +58,8 @@ async function updateQuestion(id, update) {
         if (result.matchedCount === 0) {
             throw new Error('Question not found');
         }
+        console.log("Mise à jour avec succées ", result)
+
         return result;
     } catch (err) {
         console.error('Error updating question:', err);
@@ -71,6 +75,7 @@ async function deleteQuestion(id) {
         if (result.deletedCount === 0) {
             throw new Error('Question not found');
         }
+          console.log("questions supprimé", result)
         return result;
     } catch (err) {
         console.error('Error deleting question:', err);
