@@ -42,7 +42,7 @@ async function getAnswerById(id) {
         if (!answer) {
             throw new Error('Answer not found');
         }
-        console.log("Enquete",answer)
+        console.log("Enquete ",answer)
         return answer;
     } catch (err) {
         console.error('Error getting answer by ID:', err);
@@ -58,7 +58,7 @@ async function updateAnswer(id, update) {
         if (result.matchedCount === 0) {
             throw new Error('Answer not found');
         }
-        console.log("Mise à jour avec succées",result)
+        console.log("Question à jour avec succées",result)
         return result;
     } catch (err) {
         console.error('Error updating answer:', err);
