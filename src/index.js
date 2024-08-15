@@ -35,7 +35,7 @@ async function run() {
 
         // // Créer une nouvelle réponse avec ID explicite
         const newAnswer = {
-            _id: 4,
+            _id: 1,
             questionId: 1,
             title: "Satisfait"
         };
@@ -43,24 +43,30 @@ async function run() {
 
          // // Lire toutes les réponses
         const answers = await getAnswers();
-        console.log('All Answers:', answers);
+       
 
         // // Lire une réponse par ID
-        const answer = await getAnswerById(4);
-        console.log('Answer with ID 4:', answer);
+        const answer = await getAnswerById(1);
+        
 
           // Mettre à jour une réponse
-        await updateAnswer(4, { title: "Comment évalueriez-vous notre service ?" });
+        await updateAnswer(1, { title: "Comment évalueriez-vous notre service ?" });
 
         // // Supprimer une reponse
-        await deleteAnswer(4);
+        await deleteAnswer(1);
 
         // Créer un nouveau question avec ID explicite
         const newQuestion = {
-            _id: 5,
+            _id: 1,
             surveyId: 1,
-            title: "Satisfait",
-            type:"chansons"
+            title: "Comment évalueriez-vous notre service ?",
+                    type: "rating",
+                    options: {
+                        minValue: 1,
+                        maxValue: 5,
+                        step: 1
+                    }
+
         };
         await createQuestion(newQuestion);
 
@@ -70,13 +76,13 @@ async function run() {
         
 
         // // Lire une question par ID
-        const question = await getQuestionById(5);
+        const question = await getQuestionById(1);
         
         // // // Mettre à jour une question
-        await updateQuestion(5, { title: "Comment avez-vous entendu parler de nous ?" });
+        await updateQuestion(1, { title: "Comment avez-vous entendu parler de nous ?" });
 
         // // // Supprimer une question
-        await deleteQuestion(5);
+        await deleteQuestion(1);
 
     } catch (err) {
         console.error('Error:', err);
