@@ -27,18 +27,13 @@ Suivez ces étapes pour configurer le projet sur votre machine locale :
     cd App-survey
     ```
 
-3. **Installez les dépendances :**
 
-    ```bash
-    npm install
-    ```
-
-4. **Configurez la base de données :**
+3. **Configurez la base de données :**
 
     - Assurez-vous que MongoDB est en cours d'exécution sur votre machine locale.
     - Mettez les paramètres de connexion dans `config/database.js`.
 
-## Utilisation
+4. **Utilisation:**
 
 Pour démarrer l'application, exécutez la commande suivante :
 
@@ -46,7 +41,7 @@ Pour démarrer l'application, exécutez la commande suivante :
 npm start
 
 ```
-## Documentation des function:
+5. **Documentation des function:**
 `connectDB()`
 
     Description: Cette fonction se connecte à la base de données MongoDB et retourne une instance de la base de données pour les opérations CRUD. Si une connexion existe déjà, elle retourne cette connexion.
