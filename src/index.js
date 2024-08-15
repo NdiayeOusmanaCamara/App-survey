@@ -72,8 +72,6 @@ async function run() {
         // // Lire une question par ID
         const question = await getQuestionById(5);
         
-
-    
         // // // Mettre à jour une question
         await updateQuestion(5, { title: "Comment avez-vous entendu parler de nous ?" });
 
