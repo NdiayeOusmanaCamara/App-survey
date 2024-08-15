@@ -44,7 +44,7 @@ async function getSurveyById(id) {
         if (!survey) {
             throw new Error('Survey not found');
         }
-        console.log("Survey:",survey);
+        console.log('Survey with ID 1:', survey);
         return survey;
     } catch (err) {
         console.error('Error getting survey by ID:', err);
