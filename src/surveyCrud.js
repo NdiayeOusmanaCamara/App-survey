@@ -44,7 +44,7 @@ async function getSurveyById(id) {
         if (!survey) {
             throw new Error('Survey not found');
         }
-        console.log('Survey with ID 1:', survey);
+        console.log('Survey with ID 3:', survey);
         return survey;
     } catch (err) {
         console.error('Error getting survey by ID:', err);
@@ -72,7 +72,7 @@ async function deleteSurvey(id) {
     const db = await connectDB();
     const collection = db.collection('surveys');
     try {
-        const result = await collection.deleteOne({ id: id });
+        const result = await collection.deleteOne({ _id: id });
         if (result.deletedCount === 0) {
             throw new Error('Survey not found');
         }

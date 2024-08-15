@@ -7,7 +7,7 @@ async function run() {
     try {
         // Créer une nouvelle enquête avec ID explicite
         const newSurvey = {   
-        _id: 3,
+        _id: 1,
         name: "Enquête de Satisfaction 001",
         description: "Enquête visant à évaluer la satisfaction des clients concernant nos services.",
         createdAt: "2024-07-25T08:00:00Z",
@@ -21,19 +21,19 @@ async function run() {
          // // Lire toutes les enquetes
         const surveys = await getSurveys();
         
-        
+        // Mettre à jour une enquete
+         await updateSurvey(1, { title: "Comment évalueriez-vous notre service ?" });
         // // Lire une enquête par ID
         const survey = await getSurveyById(1);
      
 
-            // Mettre à jour une enquete
-        await updateSurvey(1, { title: "Comment évalueriez-vous notre service ?" });
+       
 
         // // Supprimer une enquête
         await deleteSurvey(1);
         
 
-        // Créer une nouvelle réponse avec ID explicite
+        // // Créer une nouvelle réponse avec ID explicite
         const newAnswer = {
             _id: 4,
             questionId: 1,
