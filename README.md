@@ -55,10 +55,16 @@ Ce module gère les réponses associées aux questions dans les enquêtes.
 
 ```  créer une nouvelle réponse
 
-const newAnswer = {
-    questionId: "12345",
-    title: "Email"
-};
+ const newSurvey = {   
+            id: 1,
+            name: "Enquête de Satisfaction 001",
+            description: "Enquête visant à évaluer la satisfaction des clients concernant nos services.",
+            createdAt: "2024-07-25T08:00:00Z",
+            createdBy: {
+                employeeName: "Camara",
+                employeeRole: "Responsable du service client"
+            }
+        };
 const result = await createAnswer(newAnswer);
 ```
 `getAnswers()`
@@ -74,21 +80,21 @@ console.log(answers);
 Description: Récupère une réponse spécifique en fonction de son id
 
 ```Récupère une réponse spécifique
-const answer = await getAnswerById("12345");
+await getQuestionById(1);
 ```
 `updateAnswer(id, update)`
 
 Description: Met à jour une réponse existante avec de nouvelles informations.
 
 ```Mettre à jour une reponse
-const result = await updateAnswer("12345", { title: "Updated Answer" });
+await updateQuestion(1, { title: "Comment avez-vous entendu parler de nous ?" });
 ```
 `deleteAnswer(id)`
 
 Description: Supprime une réponse de la collection survey_answers en fonction de son id.
 
 ```Supprimer une reponse
-const result = await deleteAnswer("12345");
+await deleteQuestion(1);
 ```
 **Module :**  `Question`
 
@@ -100,10 +106,16 @@ Description: Cette fonction permet de créer une nouvelle question dans une enqu
 
 ```Créer une nouvelle question
 const newQuestion = {
-    surveyId: "67890",
-    title: "How did you hear about us?",
-    type: "singleChoice"
-};
+            id: 1,
+            surveyId: 1,
+            title: "Comment évalueriez-vous notre service ?",
+            type: "rating",
+            options: {
+                minValue: 1,
+                maxValue: 5,
+                step: 1
+            }
+        };
 const result = await createQuestion(newQuestion);
 ```
 
@@ -118,19 +130,19 @@ const questions = await getQuestions();
 
 Description: Récupère une question spécifique en fonction de son id.
 ```Lire une question
-const question = await getQuestionById("67890");
+await getQuestionById(1);
 ```
 `updateQuestion(id, update)`
 
 Description: Met à jour une question existante avec de nouvelles informations.
 ```Mettre à jour une question
-const result = await updateQuestion("67890", { title: "Updated Question" });
+await updateQuestion(1, { title: "Comment avez-vous entendu parler de nous ?" });
 ```
 `deleteQuestion(id)`
 
 Description: Supprime une question de la collection survey_questions en fonction de son.
 ```Supprimer une question
-const result = await deleteQuestion("67890");
+await deleteQuestion(1);
 ```
 **Module :**  `Survey`
 

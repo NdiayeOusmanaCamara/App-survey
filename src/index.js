@@ -1,7 +1,7 @@
 
-const { createSurvey, getSurveys, getSurveyById, updateSurvey, deleteSurvey } = require('./surveyCrud');
-const { createQuestion, getQuestions, getQuestionById, updateQuestion, deleteQuestion } = require('./questionCrud');
-const { createAnswer, getAnswers, getAnswerById, updateAnswer, deleteAnswer } = require('./answerCrud');
+const { createSurvey, getSurveys, getSurveyById, updateSurvey, deleteSurvey } = require('./surveyModule');
+const { createQuestion, getQuestions, getQuestionById, updateQuestion, deleteQuestion } = require('./questionModule');
+const { createAnswer, getAnswers, getAnswerById, updateAnswer, deleteAnswer } = require('./answerModule');
 
 async function run() {
     try {
