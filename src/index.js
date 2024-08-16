@@ -8,7 +8,7 @@ async function run() {
         
         console.log("==== Gestion des Enquêtes ====");
         const newSurvey = {   
-            surveyId: 1,
+            id: 1,
             name: "Enquête de Satisfaction 001",
             description: "Enquête visant à évaluer la satisfaction des clients concernant nos services.",
             createdAt: "2024-07-25T08:00:00Z",
@@ -27,7 +27,7 @@ async function run() {
        
         console.log("\n==== Gestion des Questions ====");
         const newQuestion = {
-            questionId: 1,
+            id: 3,
             surveyId: 1,
             title: "Comment évalueriez-vous notre service ?",
             type: "rating",
@@ -40,14 +40,14 @@ async function run() {
         await createQuestion(newQuestion);
 
         await getQuestions();
-        await getQuestionById(1);
-        await updateQuestion(1, { title: "Comment avez-vous entendu parler de nous ?" });
-        await deleteQuestion(1);
+        await getQuestionById(3);
+        await updateQuestion(3, { title: "Comment avez-vous entendu parler de nous ?" });
+        await deleteQuestion(3);
 
        
         console.log("\n==== Gestion des Réponses ====");
         const newAnswer = {
-            answerId: 1,
+            id: 1,
             questionId: 1,
             title: "Satisfait"
         };
