@@ -7,13 +7,13 @@ async function createAnswer(answer) {
 
     try {
         
-        const existingAnswer = await collection.findOne({ id: answer.id });
+        const existingAnswer = await collection.findOne({ answerId: answer.answerId });
         if (existingAnswer) {
             throw new Error('Une réponse avec cet ID existe déjà.');
         }
 
         const result = await collection.insertOne(answer);
-        console.log(`Réponse ajoutée avec succès : ${answer.title} (ID: ${answer.id})`);
+        console.log(`Réponse ajoutée avec succès : ${answer.title} (ID: ${answer.answerId})`);
         return result;
     } catch (err) {
         console.error('Erreur lors de la création de la réponse :', err);
@@ -34,15 +34,15 @@ async function getAnswers() {
     }
 }
 
-async function getAnswerById(id) {
+async function getAnswerById(answerId) {
     const db = await connectDB();
     const collection = db.collection('survey_answers');
     try {
-        const answer = await collection.findOne({ id: id });
+        const answer = await collection.findOne({ answerId: answerId });
         if (!answer) {
-            throw new Error(`Réponse avec l'ID ${id} introuvable.`);
+            throw new Error(`Réponse avec l'ID ${answerId} introuvable.`);
         }
-        console.log(`Réponse trouvée avec l'ID ${id} :`, answer);
+        console.log(`Réponse trouvée avec l'ID ${answerId} :`, answer);
         return answer;
     } catch (err) {
         console.error('Erreur lors de la récupération de la réponse par ID :', err);
@@ -50,15 +50,15 @@ async function getAnswerById(id) {
     }
 }
 
-async function updateAnswer(id, update) {
+async function updateAnswer(answerId, update) {
     const db = await connectDB();
     const collection = db.collection('survey_answers');
     try {
-        const result = await collection.updateOne({ id: id }, { $set: update });
+        const result = await collection.updateOne({ answerId: answerId }, { $set: update });
         if (result.matchedCount === 0) {
-            throw new Error(`Réponse avec l'ID ${id} introuvable.`);
+            throw new Error(`Réponse avec l'ID ${answerId} introuvable.`);
         }
-        console.log(`Réponse avec l'ID ${id} mise à jour avec succès.`);
+        console.log(`Réponse avec l'ID ${answerId} mise à jour avec succès.`);
         return result;
     } catch (err) {
         console.error('Erreur lors de la mise à jour de la réponse :', err);
@@ -66,15 +66,15 @@ async function updateAnswer(id, update) {
     }
 }
 
-async function deleteAnswer(id) {
+async function deleteAnswer(answerId) {
     const db = await connectDB();
     const collection = db.collection('survey_answers');
     try {
-        const result = await collection.deleteOne({ id: id });
+        const result = await collection.deleteOne({ answerId: answerId });
         if (result.deletedCount === 0) {
-            throw new Error(`Réponse avec l'ID ${id} introuvable.`);
+            throw new Error(`Réponse avec l'ID ${answerId} introuvable.`);
         }
-        console.log(`Réponse avec l'ID ${id} supprimée avec succès.`);
+        console.log(`Réponse avec l'ID ${answerId} supprimée avec succès.`);
         return result;
     } catch (err) {
         console.error('Erreur lors de la suppression de la réponse :', err);
