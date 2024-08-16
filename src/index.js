@@ -47,7 +47,7 @@ async function run() {
        
         console.log("\n==== Gestion des Réponses ====");
         const newAnswer = {
-            answerId: 3,
+            answerId: 1,
             questionId: 1,
             title: "Satisfait"
         };
