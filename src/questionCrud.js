@@ -1,4 +1,4 @@
-// questionCrud.js
+
 const { connectDB } = require('./database');
 
 async function createQuestion(question) {
@@ -6,17 +6,17 @@ async function createQuestion(question) {
     const collection = db.collection('survey_questions');
 
     try {
-        // Vérifier si une question avec le même ID existe déjà
-        const existingQuestion = await collection.findOne({ _id: question._id });
+        
+        const existingQuestion = await collection.findOne({ id: question.id });
         if (existingQuestion) {
-            throw new Error('Question with this ID already exists');
+            throw new Error('Une question avec cet ID existe déjà.');
         }
 
         const result = await collection.insertOne(question);
-        console.log("Question ajouté avec succées", result)
+        console.log(`Question ajoutée avec succès : ${question.title} (ID: ${question.id})`);
         return result;
     } catch (err) {
-        console.error('Error creating question:', err);
+        console.error('Erreur lors de la création de la question :', err);
         throw err;
     }
 }
@@ -26,10 +26,10 @@ async function getQuestions() {
     const collection = db.collection('survey_questions');
     try {
         const questions = await collection.find().toArray();
-        console.log('All Questions:', questions);
+        console.log(`Total de ${questions.length} questions trouvées :`, questions);
         return questions;
     } catch (err) {
-        console.error('Error getting questions:', err);
+        console.error('Erreur lors de la récupération des questions :', err);
         throw err;
     }
 }
@@ -38,14 +38,14 @@ async function getQuestionById(id) {
     const db = await connectDB();
     const collection = db.collection('survey_questions');
     try {
-        const question = await collection.findOne({ _id: id });
+        const question = await collection.findOne({ id: id });
         if (!question) {
-            throw new Error('Question not found');
+            throw new Error(`Question avec l'ID ${id} introuvable.`);
         }
-        console.log('Question with ID:', question);
+        console.log(`Question trouvée avec l'ID ${id} :`, question);
         return question;
     } catch (err) {
-        console.error('Error getting question by ID:', err);
+        console.error('Erreur lors de la récupération de la question par ID :', err);
         throw err;
     }
 }
@@ -54,15 +54,14 @@ async function updateQuestion(id, update) {
     const db = await connectDB();
     const collection = db.collection('survey_questions');
     try {
-        const result = await collection.updateOne({ _id: id }, { $set: update });
+        const result = await collection.updateOne({ id: id }, { $set: update });
         if (result.matchedCount === 0) {
-            throw new Error('Question not found');
+            throw new Error(`Question avec l'ID ${id} introuvable.`);
         }
-        console.log("Mise à jour avec succées ", result)
-
+        console.log(`Question avec l'ID ${id} mise à jour avec succès.`);
         return result;
     } catch (err) {
-        console.error('Error updating question:', err);
+        console.error('Erreur lors de la mise à jour de la question :', err);
         throw err;
     }
 }
@@ -71,14 +70,14 @@ async function deleteQuestion(id) {
     const db = await connectDB();
     const collection = db.collection('survey_questions');
     try {
-        const result = await collection.deleteOne({ _id: id });
+        const result = await collection.deleteOne({ id: id });
         if (result.deletedCount === 0) {
-            throw new Error('Question not found');
+            throw new Error(`Question avec l'ID ${id} introuvable.`);
         }
-          console.log("questions supprimé", result)
+        console.log(`Question avec l'ID ${id} supprimée avec succès.`);
         return result;
     } catch (err) {
-        console.error('Error deleting question:', err);
+        console.error('Erreur lors de la suppression de la question :', err);
         throw err;
     }
 }

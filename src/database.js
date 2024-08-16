@@ -1,14 +1,14 @@
 const { MongoClient } = require('mongodb');
 
 const url = 'mongodb://localhost:27017';
-const dbName = 'customer_surveys';
+const dbName = 'customer_survey';
 
 let db = null;
 
 async function connectDB() {
     if (db) return db;
 
-    // Supprimer les options obsolètes
+    
     const client = new MongoClient(url);
 
     try {
