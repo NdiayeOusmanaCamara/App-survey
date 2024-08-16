@@ -1,5 +1,5 @@
 
-const { connectDB } = require('./database');
+const { connectDB } = require('./config/database');
 
 async function createSurvey(survey) {
     const db = await connectDB();
