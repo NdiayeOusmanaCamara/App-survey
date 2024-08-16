@@ -189,14 +189,6 @@ Description: Supprime une enquête de la collection surveys en fonction de son i
 await deleteSurvey(1);
 
 ```
-**Fonction principale :** `run()`
-
-Description: Une fonction d'exécution principale qui teste toutes les fonctionnalités CRUD (Create, Read, Update, Delete) pour les enquêtes, questions, et réponses.
-```fonction principal
-async function run() {
-    // Logique de test CRUD ici
-}
-```
 
 
 ## Authors
