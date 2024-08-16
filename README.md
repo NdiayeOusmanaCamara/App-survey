@@ -152,41 +152,41 @@ Ce module gère les enquêtes elles-mêmes.
 
 Description: Cette fonction permet de créer une nouvelle enquête.`
 ```Créer une nouvelle enquete
-const newSurvey = {
-    name: "Customer Satisfaction Survey",
-    description: "Survey to evaluate customer satisfaction.",
-    createdAt: new Date(),
-    createdBy: {
-        employeeName: "John Doe",
-        employeeRole: "Marketing Manager"
-    }
-};
+const newSurvey = {   
+            id: 1,
+            name: "Enquête de Satisfaction 001",
+            description: "Enquête visant à évaluer la satisfaction des clients concernant nos services.",
+            createdAt: "2024-07-25T08:00:00Z",
+            createdBy: {
+                employeeName: "Camara",
+                employeeRole: "Responsable du service client"
+            }
+        };
 const result = await createSurvey(newSurvey);
 ```
 `getSurveys()`
 
 Description: Récupère toutes les enquêtes stockées dans la collection surveys.
 ```Recupere les enquetes
-const surveys = await getSurveys();
-console.log(surveys);
+await getSurveys();
 ```
 `getSurveyById(id)`
 
 Description: Récupère une enquête spécifique en fonction de son id.
 ```Lire une enquete spécifique
-const survey = await getSurveyById("12345");
+await getSurveyById(1);
 ```
 `updateSurvey(id, update)`
 
 Description: Met à jour une enquête existante avec de nouvelles informations.
 ```Metre à jour une enquete
-const result = await updateSurvey("12345", { description: "Updated Survey Description" });
+await updateSurvey(1, { name: "Enquête de Satisfaction Mise à Jour" });
 ```
 `deleteSurvey(id)`
 
 Description: Supprime une enquête de la collection surveys en fonction de son id.
 ```Supprimer une enquête
-const result = await deleteSurvey("12345");
+await deleteSurvey(1);
 
 ```
 **Fonction principale :** `run()`
